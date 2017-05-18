@@ -196,8 +196,7 @@ class Client(object):
         :returns: Pricing Twilio Domain
         :rtype: twilio.rest.pricing.Pricing
         """
-        if self._pricing is None:
-            from twilio.rest.pricing import Pricing
+        if self._pricing is None:            
             self._pricing = self._import_dependent_object('twilio.rest.pricing', 'Pricing')(self)
         return self._pricing
 
