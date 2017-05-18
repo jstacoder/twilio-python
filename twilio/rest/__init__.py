@@ -112,6 +112,10 @@ class Client(object):
             allow_redirects=allow_redirects
         )
 
+    @staticmethod
+    def _import_dependent_object(module, obj):
+        return getattr(__import__(module, {}, {}, ['']), obj)
+
     @property
     def accounts(self):
         """
@@ -120,9 +124,8 @@ class Client(object):
         :returns: Accounts Twilio Domain
         :rtype: twilio.rest.accounts.Accounts
         """
-        if self._accounts is None:
-            from twilio.rest.accounts import Accounts
-            self._accounts = Accounts(self)
+        if self._accounts is None:            
+            self._accounts = self._import_dependent_object('twilio.rest.accounts', 'Accounts')(self)
         return self._accounts
 
     @property
@@ -133,9 +136,8 @@ class Client(object):
         :returns: Api Twilio Domain
         :rtype: twilio.rest.api.Api
         """
-        if self._api is None:
-            from twilio.rest.api import Api
-            self._api = Api(self)
+        if self._api is None:            
+            self._api = self._import_dependent_object('twilio.rest.api', 'Api')(self)
         return self._api
 
     @property
@@ -146,9 +148,8 @@ class Client(object):
         :returns: Chat Twilio Domain
         :rtype: twilio.rest.chat.Chat
         """
-        if self._chat is None:
-            from twilio.rest.chat import Chat
-            self._chat = Chat(self)
+        if self._chat is None:            
+            self._chat = self._import_dependent_object('twilio.rest.chat', 'Chat')(self)
         return self._chat
 
     @property
@@ -159,9 +160,8 @@ class Client(object):
         :returns: IpMessaging Twilio Domain
         :rtype: twilio.rest.ip_messaging.IpMessaging
         """
-        if self._ip_messaging is None:
-            from twilio.rest.ip_messaging import IpMessaging
-            self._ip_messaging = IpMessaging(self)
+        if self._ip_messaging is None:            
+            self._ip_messaging = self._import_dependent_object('twilio.rest.ip_messaging', 'IpMessaging')(self)
         return self._ip_messaging
 
     @property
@@ -172,9 +172,8 @@ class Client(object):
         :returns: Lookups Twilio Domain
         :rtype: twilio.rest.lookups.Lookups
         """
-        if self._lookups is None:
-            from twilio.rest.lookups import Lookups
-            self._lookups = Lookups(self)
+        if self._lookups is None:            
+            self._lookups = self._import_dependent_object('twilio.rest.lookups', 'Lookups')(self)
         return self._lookups
 
     @property
@@ -185,9 +184,8 @@ class Client(object):
         :returns: Monitor Twilio Domain
         :rtype: twilio.rest.monitor.Monitor
         """
-        if self._monitor is None:
-            from twilio.rest.monitor import Monitor
-            self._monitor = Monitor(self)
+        if self._monitor is None:            
+            self._monitor = self._import_dependent_object('twilio.rest.monitor', 'Monitor')(self)
         return self._monitor
 
     @property
@@ -200,7 +198,7 @@ class Client(object):
         """
         if self._pricing is None:
             from twilio.rest.pricing import Pricing
-            self._pricing = Pricing(self)
+            self._pricing = self._import_dependent_object('twilio.rest.pricing', 'Pricing')(self)
         return self._pricing
 
     @property
@@ -211,9 +209,8 @@ class Client(object):
         :returns: Taskrouter Twilio Domain
         :rtype: twilio.rest.taskrouter.Taskrouter
         """
-        if self._taskrouter is None:
-            from twilio.rest.taskrouter import Taskrouter
-            self._taskrouter = Taskrouter(self)
+        if self._taskrouter is None:            
+            self._taskrouter = self._import_dependent_object('twilio.rest.taskrouter', 'Taskrouter')(self)
         return self._taskrouter
 
     @property
@@ -224,9 +221,8 @@ class Client(object):
         :returns: Trunking Twilio Domain
         :rtype: twilio.rest.trunking.Trunking
         """
-        if self._trunking is None:
-            from twilio.rest.trunking import Trunking
-            self._trunking = Trunking(self)
+        if self._trunking is None:            
+            self._trunking = self._import_dependent_object('twilio.rest.trunking', 'Trunking')(self)
         return self._trunking
 
     @property
